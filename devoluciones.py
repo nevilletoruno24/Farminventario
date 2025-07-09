@@ -136,7 +136,7 @@ def registrar_devolucion(usuario_actual):
     print("\nSeleccione los productos a devolver:")
     for i, prod in enumerate(factura_seleccionada['productos'], 1):
         precio_unitario = prod.get('total', 0) / prod.get('cantidad', 1) if prod.get('cantidad', 0) > 0 else 0
-        print(f"{i}. {prod['nombre']} - Cantidad: {prod['cantidad']} - Total: S/ {prod.get('total', 0):.2f}")
+        print(f"{i}. {prod['nombre']} - Cantidad: {prod['cantidad']} - Total: C$/ {prod.get('total', 0):.2f}")
     
     while True:
         seleccion_productos = input("\nIngrese los números de productos a devolver (separados por comas) o 0 para cancelar: ").strip()
@@ -201,7 +201,7 @@ def registrar_devolucion(usuario_actual):
     actualizar_inventario_devolucion(productos_devolucion)
     
     print(f"\nDevolución registrada exitosamente.")
-    print(f"Total devuelto: S/ {sum(p['total'] for p in productos_devolucion):.2f}")
+    print(f"Total devuelto: C$/ {sum(p['total'] for p in productos_devolucion):.2f}")
     
     input("\nPresione Enter para continuar...")
 
