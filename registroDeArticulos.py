@@ -85,10 +85,10 @@ def registrar_articulo():
     
     # Proveedor (opcional, hasta 50 caracteres)
     proveedor = input("Proveedor (opcional - hasta 50 caracteres): ").strip()[:50]
-    total = cantidad * precio
+
     # Guardar en el archivo
     with open(ARCHIVO_INVENTARIO, "a") as f:
-        f.write(f"{codigo}|{nombre}|{categoria}|{precio}|{cantidad}|{total}|{fecha_vencimiento}|{proveedor}"+"\n")
+        f.write(f"{codigo}|{nombre}|{categoria}|{precio}|{cantidad}|{fecha_vencimiento}|{proveedor}"+"\n")
     
     
     # Mostrar resumen
@@ -98,7 +98,8 @@ def registrar_articulo():
     print(f"- Categoría: {categoria}")
     print(f"- Precio por unidad: {precio}")
     print(f"- Cantidad en stock: {cantidad}")
-    print(f"- Total: {total}")
     print(f"- Fecha de vencimiento: {fecha_vencimiento if fecha_vencimiento else 'N/A'}")
     print(f"- Proveedor: {proveedor if proveedor else 'N/A'}")
+
+
 
