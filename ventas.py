@@ -86,7 +86,7 @@ def generar_factura():
         
         # Calcular valores
         subtotal = articulo['precio'] * cantidad
-        igv = subtotal * 0.18
+        igv = subtotal * 0.15
         total = subtotal + igv
         
         fecha_factura = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
@@ -130,7 +130,7 @@ def generar_factura():
         ))
     
     print("-" * 80)
-    print(f"TOTAL A PAGAR: S/ {total:.2f}")
+    print(f"TOTAL A PAGAR: C$/ {total:.2f}")
     
     # Actualizar stock y guardar factura
     for prod in productos:
@@ -163,3 +163,4 @@ def obtener_codigo():
     except FileNotFoundError:
         # Si el archivo no existe, comienza con código 1
         return 1
+
