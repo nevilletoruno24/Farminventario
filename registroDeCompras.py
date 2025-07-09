@@ -146,6 +146,6 @@ def registrar_compra(usuario_actual):
     print(f"- Código de artículo: {codigo}")
     print(f"- Proveedor: {proveedor}")
     print(f"- Cantidad comprada: {cantidad}")
-    print(f"- Precio unitario: S/ {precio:.2f}")
-    print(f"- Total de compra: S/ {total:.2f}")
+    print(f"- Precio unitario: C$/ {precio:.2f}")
+    print(f"- Total de compra: C$/ {total:.2f}")
     print(f"- Fecha: {fecha_compra}")
