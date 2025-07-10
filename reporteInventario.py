@@ -108,7 +108,6 @@ def generar_reporte_eliminaciones():
     print(f"Total de artículos eliminados: {len(lineas)}")
 
 def generar_reporte_facturas():
-    """Genera un reporte de facturas emitidas"""
     lineas = leer_archivo(ARCHIVO_FACTURAS)
     if not lineas:
         print("\nNo hay facturas registradas.")
@@ -116,26 +115,43 @@ def generar_reporte_facturas():
     
     print("\n=== REPORTE DE FACTURAS ===")
     print("-" * 120)
-    print("{:<30} {:<35} {:<15} {:<20} {:<10} {:<15}".format(
+    print("{:<30} {:<20} {:<10} {:<20} {:<10} {:<10}".format(
         "Fecha", "Cliente", "Código", "Producto", "Cantidad", "Total"))
     print("-" * 120)
     
     for linea in lineas:
-        if linea.strip():  # Verificar que la línea no esté vacía
-            partes = [p.strip() for p in linea.split("|")]
-            if len(partes) >= 6:  # Verificar que tenga todos los campos necesarios
-                fecha = partes[0]
-                cliente = partes[1].split(":")[1].strip() if ":" in partes[1] else partes[1]
-                codigo = partes[2].split(":")[1].strip() if ":" in partes[2] else partes[2]
-                producto = partes[3].split(":")[1].strip() if ":" in partes[3] else partes[3]
-                cantidad = partes[4].split(":")[1].strip() if ":" in partes[4] else partes[4]
-                total = partes[5].split(":")[1].strip() if ":" in partes[5] else partes[5]
-                
-                print("{:<30} {:<35} {:<15} {:<20} {:<10} {:<15}".format(
-                    fecha, cliente, codigo, producto, cantidad, total))
+        if linea.strip():
+            partes = [p.strip() for p in linea.strip().split("|") if ":" in p]
+            datos = {}
+            for parte in partes:
+                clave, valor = parte.split(":", 1)
+                clave = clave.strip().lower()
+                valor = valor.strip()
+                if clave == "fecha":
+                    datos["fecha"] = valor
+                elif clave == "cliente":
+                    datos["cliente"] = valor
+                elif clave == "codigo":
+                    datos["codigo"] = valor
+                elif clave == "producto":
+                    datos["producto"] = valor
+                elif clave == "cantidad":
+                    datos["cantidad"] = valor
+                elif clave == "total":
+                    datos["total"] = valor
+
+            print("{:<30} {:<20} {:<10} {:<20} {:<10} C$/ {:<10}".format(
+                datos.get("fecha", "N/A"),
+                datos.get("cliente", "N/A"),
+                datos.get("codigo", "N/A"),
+                datos.get("producto", "N/A"),
+                datos.get("cantidad", "N/A"),
+                datos.get("total", "0.00")
+            ))
     
     print("-" * 120)
-    print(f"Total de facturas emitidas: {len([l for l in lineas if l.strip()])}")
+    print(f"Total de facturas emitidas: {len(lineas)}")
+
 
 def generar_reporte_devoluciones():
     """Genera un reporte de devoluciones"""
